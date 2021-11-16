@@ -1,0 +1,112 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+
+    <div class="center-block" >
+        <h:form>
+            <p:growl id="growl" life="2000" />
+            <div class="form-group text-center">
+                <p:commandButton id="btn-load-db" update="growl"
+                                 actionListener="#{generalBean.actionCargarBaseDatos}" styleClass="ui-priority-primary"
+                                 style="width: 40% !important"
+                                 value="CARGAR BASE DE DATOS" />
+            </div>
+        </h:form>
+
+        <h:form>
+            <p:growl id="growl" life="2000" />
+            <div class="form-group text-center">
+                <p:commandButton id="btn-drop-db" update="growl"
+                                 actionListener="#{generalBean.actionEliminarBaseDatos}" styleClass="ui-priority-primary"
+                                 style="width: 40% !important"
+                                 value="ELIMINAR BASE DE DATOS" />
+            </div>
+        </h:form>
+
+        <h:form>
+            <p:growl id="growl" life="2000" />
+            <div class="form-group text-center">
+                <p:commandButton id="btn-report-db" update="growl"
+                                 onclick="PF('dlg-report').show();" styleClass="ui-priority-primary"
+                                 style="width: 40% !important"
+                                 value="GENERAR REPORTE" />
+            </div>
+        </h:form>
+
+        <h:form>
+            <p:growl id="growl" life="2000" />
+            <div class="form-group text-center">
+                <p:commandButton id="btn-search-db" update="growl"
+                                 actionListener="#{generalBean.actionCargarBaseDatos}" styleClass="ui-priority-primary"
+                                 style="width: 40% !important"
+                                 value="BUSQUEDA" />
+            </div>
+        </h:form>
+
+        <!-- DIALOGS -->
+
+        <h:form styleClass="form-horizontal">
+            <p:growl id="growl" life="2000" />
+            <p:dialog id="dlg-report" widgetVar="dlg-report" modal="true" resizable="false" width="400">
+                <div class="well">
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label for="region" class="col-lg-3 control-label"> Region </label>
+                            <div class="col-lg-2">
+                                <p:selectBooleanCheckbox value="#{generalBean.seleccionarRegion}" >
+                                    <p:ajax update="@form"  />
+                                </p:selectBooleanCheckbox>
+                            </div>
+                            <div class="col-lg-7">
+                                <p:inputText id="region" styleClass="form-control" placeholder="Valor Busqueda"
+                                             value="#{generalBean.parametroBusquedaRegion}"  rendered="#{generalBean.seleccionarRegion}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="area" class="col-lg-3 control-label"> Area </label>
+                            <div class="col-lg-2">
+                                <p:selectBooleanCheckbox value="#{generalBean.seleccionarArea}" >
+                                    <p:ajax update="@form"  />
+                                </p:selectBooleanCheckbox>
+                            </div>
+                            <div class="col-lg-7">
+                                <p:inputText id="area" styleClass="form-control" placeholder="Valor Busqueda"
+                                             value="#{generalBean.parametroBusquedaArea}"  rendered="#{generalBean.seleccionarArea}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="poblacion" class="col-lg-3 control-label"> Poblacion </label>
+                            <div class="col-lg-2">
+                                <p:selectBooleanCheckbox value="#{generalBean.seleccionarPoblacion}" >
+                                    <p:ajax update="@form"  />
+                                </p:selectBooleanCheckbox>    
+                            </div>
+                            <div class="col-lg-7">
+                                <p:inputText id="poblacion" styleClass="form-control" placeholder="Valor Busqueda"
+                                             value="#{generalBean.parametroBusquedaPoblacion}" rendered="#{generalBean.seleccionarPoblacion}" />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group text-center">
+                            <p:commandButton id="btn-login" styleClass="btn btn-default"
+                                             value="Generar Reporte" ajax="false"
+                                             actionListener="#{generalBean.actionGenerarReporte}"/>
+                        </div>
+
+                    </fieldset>
+                </div>
+            </p:dialog>
+
+        </h:form>
+    </div>
+
+</ui:composition>
+
